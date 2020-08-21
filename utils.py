@@ -3,6 +3,7 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.tokenize import TweetTokenizer
+from collections import defaultdict
 
 def process_tweets(tweet):
     """process tweets
@@ -34,6 +35,21 @@ def process_tweets(tweet):
             tweets_clean.append(stem_word)
     return tweets_clean
 
+
+def build_freqs(tweets, ys):
+    """Building freqeuncy of tweets
+        Input:
+            tweet: a list of tweets
+            ys: an m by one of sentiment of each tweet
+        Output:
+            freqs: a dictionary mapping each (word, sentiment) pair to its frequency
+            
+    """
+    freqs = defaultdict(int)
+    for i, tweet in enumerate(tweets):
+        for word in tweet:
+            freqs[(word, ys[i])] += 1
+    return freqs
     
    
 
